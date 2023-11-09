@@ -1,3 +1,4 @@
+const sheetUpload = require('./sheetupload')
 const axios = require("axios");
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 
@@ -28,7 +29,7 @@ async function fetchAdInsights(adId) {
     };
 
     const response = await axios.get(endpoint, { params });
-
+    if (response.data.data.length)
     await csvWriter.writeRecords(response.data.data);
 
     console.log(`Data saved for Ad ID ${adId}`);
@@ -82,6 +83,7 @@ async function fetchAdAccountIds() {
         const adAccountId = adAccount.id;
         await fetchAdIds(adAccountId);
       }
+      sheetUpload.start();
     } else {
       console.log("No ad accounts found for your user.");
     }
@@ -94,3 +96,4 @@ async function fetchAdAccountIds() {
 }
 
 fetchAdAccountIds();
+

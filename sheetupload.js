@@ -100,10 +100,10 @@ async function pushCsvToGSheet(csvPath, sheetId, spreadsheetId) {
 }
 
 const SPREADSHEET_ID = '1z1eJYK70dvm4AcIce4OLDp78Yu5ICGdPLljXMYQnHhM'; 
-const WORKSHEET_NAME = 'your_worksheet_name'; 
+const WORKSHEET_NAME = 'ad_metrics'; 
 const PATH_TO_CSV = 'ad_metrics.csv'; 
 
-(async () => {
+exports.start = async () => {
   const sheetId = await findSheetIdByName(WORKSHEET_NAME, SPREADSHEET_ID);
   await pushCsvToGSheet(PATH_TO_CSV, sheetId, SPREADSHEET_ID);
-})();
+};
